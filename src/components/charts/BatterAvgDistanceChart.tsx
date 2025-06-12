@@ -61,8 +61,7 @@ const BatterAvgDistanceChart = ({ data }: BatterAvgDistanceChartProps) => {
 
 		return Array.from(map.entries()).map(([id, hits]) => {
 			const avgDistance = Math.floor(
-				hits.reduce((acc, curr) => acc + parseInt(curr.HIT_DISTANCE), 0) /
-					hits.length
+				hits.reduce((acc, curr) => acc + curr.HIT_DISTANCE, 0) / hits.length
 			);
 			const batter = batters.find((b) => b.value === id);
 			return { name: batter?.label, y: avgDistance };

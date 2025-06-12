@@ -10,7 +10,22 @@ export function parseCsv(text: string): Hit[] {
 		headers.forEach((header, index) => {
 			row[header] = values[index] ?? "";
 		});
-		return row as Hit;
+		const hit: Hit = {
+			BATTER_ID: row.BATTER_ID,
+			BATTER: row.BATTER,
+			PITCHER_ID: row.PITCHER_ID,
+			PITCHER: row.PITCHER,
+			GAME_DATE: row.GAME_DATE,
+			LAUNCH_ANGLE: parseFloat(row.LAUNCH_ANGLE),
+			EXIT_SPEED: parseFloat(row.EXIT_SPEED),
+			EXIT_DIRECTION: parseFloat(row.EXIT_DIRECTION),
+			HIT_DISTANCE: parseFloat(row.HIT_DISTANCE),
+			HANG_TIME: parseFloat(row.HANG_TIME),
+			HIT_SPIN_RATE: parseFloat(row.HIT_SPIN_RATE),
+			PLAY_OUTCOME: row.PLAY_OUTCOME,
+			VIDEO_LINK: row.VIDEO_LINK,
+		};
+		return hit;
 	});
 }
 

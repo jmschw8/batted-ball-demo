@@ -63,7 +63,7 @@ const HardestHits = ({ data }: HardestHitsProps) => {
 	}>(defaultVideoState);
 
 	const filteredData = data
-		.sort((a, b) => parseFloat(b.EXIT_SPEED) - parseFloat(a.EXIT_SPEED))
+		.sort((a, b) => b.EXIT_SPEED - a.EXIT_SPEED)
 		.filter((hit) => {
 			const gameDate = new Date(hit.GAME_DATE);
 			if (date.from && date.to) {
@@ -125,7 +125,7 @@ const HardestHits = ({ data }: HardestHitsProps) => {
 						<TableRow key={`${hit.BATTER_ID}-${hit.EXIT_SPEED}`}>
 							<TableCell>{hit.BATTER}</TableCell>
 							<TableCell>{hit.PITCHER}</TableCell>
-							<TableCell>{parseFloat(hit.EXIT_SPEED).toFixed(2)}</TableCell>
+							<TableCell>{hit.EXIT_SPEED.toFixed(2)}</TableCell>
 							<TableCell>
 								<Button
 									variant="ghost"

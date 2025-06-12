@@ -23,16 +23,13 @@ const colors: Record<string, string> = {
 const OutcomesByVelocity = ({ data }: OutcomesPieChartProps) => {
 	// TODO should be parsing floats in fetch logic
 	const sorted = data?.sort(
-		(a, b) =>
-			Math.ceil(parseFloat(a.EXIT_SPEED)) - Math.ceil(parseFloat(b.EXIT_SPEED))
+		(a, b) => Math.ceil(a.EXIT_SPEED) - Math.ceil(b.EXIT_SPEED)
 	);
 	console.log(sorted[sorted.length - 1].EXIT_SPEED);
-	const maxVelocity = Math.ceil(
-		parseFloat(sorted[sorted.length - 1].EXIT_SPEED)
-	);
+	const maxVelocity = Math.ceil(sorted[sorted.length - 1].EXIT_SPEED);
 	const [selectedRange, setSelectedRange] = useState([0, maxVelocity]);
 	const filteredData = data.filter((hit) => {
-		const exitSpeed = Math.ceil(parseFloat(hit.EXIT_SPEED));
+		const exitSpeed = Math.ceil(hit.EXIT_SPEED);
 		return exitSpeed > selectedRange[0] && exitSpeed <= selectedRange[1];
 	});
 
