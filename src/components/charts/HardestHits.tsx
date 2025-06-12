@@ -23,6 +23,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "../ui/dialog";
+import { formatName } from "@/utils/utils";
 
 type VideoProps = {
 	url: string | undefined;
@@ -111,43 +112,53 @@ const HardestHits = ({ data }: HardestHitsProps) => {
 					</PopoverContent>
 				</Popover>
 			</div>
-			<Table>
-				<TableHeader>
-					<TableRow>
-						<TableHead>Player</TableHead>
-						<TableHead>Pitcher</TableHead>
-						<TableHead>Exit Velocity</TableHead>
-						<TableHead>Video</TableHead>
-					</TableRow>
-				</TableHeader>
-				<TableBody>
-					{filteredData.map((hit) => (
-						<TableRow key={`${hit.BATTER_ID}-${hit.EXIT_SPEED}`}>
-							<TableCell>{hit.BATTER}</TableCell>
-							<TableCell>{hit.PITCHER}</TableCell>
-							<TableCell>{hit.EXIT_SPEED.toFixed(2)}</TableCell>
-							<TableCell>
-								<Button
-									variant="ghost"
-									onClick={() =>
-										setVideoModalConfig({ url: hit.VIDEO_LINK, open: true })
-									}
-								>
-									<Eye />
-								</Button>
-							</TableCell>
+			{filteredData.length > 0 ? (
+				<Table>
+					<TableHeader>
+						<TableRow>
+							<TableHead>Player</TableHead>
+							<TableHead>Pitcher</TableHead>
+							<TableHead>Exit Velocity</TableHead>
+							<TableHead>Video</TableHead>
 						</TableRow>
-					))}
-				</TableBody>
-			</Table>
+					</TableHeader>
+					<TableBody>
+						{filteredData.map((hit) => (
+							<TableRow key={`${hit.BATTER_ID}-${hit.EXIT_SPEED}`}>
+								<TableCell>{formatName(hit.BATTER)}</TableCell>
+								<TableCell>{formatName(hit.PITCHER)}</TableCell>
+								<TableCell>{`${hit.EXIT_SPEED.toFixed(2)} mph`}</TableCell>
+								<TableCell>
+									<Button
+										variant="ghost"
+										onClick={() =>
+											setVideoModalConfig({ url: hit.VIDEO_LINK, open: true })
+										}
+									>
+										<Eye />
+									</Button>
+								</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>
+			) : (
+				<div className="w-full h-72 flex flex-col justify-center">
+					<h3 className="text-xl text-center">
+						There is no data for the specified date range
+					</h3>
+				</div>
+			)}
 			{/* TODO Pagination */}
-			<VideoDialog
-				open={videoModalConfig.open}
-				url={videoModalConfig.url}
-				onOpenChange={() => {
-					setVideoModalConfig(defaultVideoState);
-				}}
-			/>
+			{videoModalConfig.open && (
+				<VideoDialog
+					open={videoModalConfig.open}
+					url={videoModalConfig.url}
+					onOpenChange={() => {
+						setVideoModalConfig(defaultVideoState);
+					}}
+				/>
+			)}
 		</ChartCard>
 	);
 };

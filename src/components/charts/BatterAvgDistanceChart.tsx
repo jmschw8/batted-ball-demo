@@ -6,6 +6,7 @@ import type * as Highcharts from "highcharts";
 import { MultiSelect } from "../ui/multi-select";
 import { Badge } from "../ui/badge";
 import { outComes } from "@/utils/constants";
+import { formatName } from "@/utils/utils";
 
 type BatterAvgDistanceChartProps = {
 	data: Hit[];
@@ -64,7 +65,8 @@ const BatterAvgDistanceChart = ({ data }: BatterAvgDistanceChartProps) => {
 				hits.reduce((acc, curr) => acc + curr.HIT_DISTANCE, 0) / hits.length
 			);
 			const batter = batters.find((b) => b.value === id);
-			return { name: batter?.label, y: avgDistance };
+			//todo fix typing
+			return { name: batter ? formatName(batter.label) : "", y: avgDistance };
 		});
 	}, [data, selectedBatter, batters, selectedOutcome]);
 
