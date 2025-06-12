@@ -1,6 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import ThemeToggleButton from "./ThemeToggle";
 import { Button } from "@/components/ui/button";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu } from "lucide-react";
 
 const links = [
 	{
@@ -29,7 +36,7 @@ const Navbar = () => {
 					Batted Balls Dashboard
 				</Link>
 			</div>
-			<div className="flex gap-x-4">
+			<div className="hidden md:flex gap-x-4">
 				{links.map((link) => (
 					<Button asChild key={link.text} variant={"outline"}>
 						<Link to={link.path} key={link.text}>
@@ -37,6 +44,24 @@ const Navbar = () => {
 						</Link>
 					</Button>
 				))}
+			</div>
+			<div className="md:hidden">
+				<DropdownMenu>
+					<DropdownMenuTrigger>
+						<Button variant="ghost">
+							<Menu />
+						</Button>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent className="p-2 mx-2">
+						{links.map((link) => (
+							<DropdownMenuItem asChild key={link.text}>
+								<Link to={link.path} key={link.text}>
+									{link.text}
+								</Link>
+							</DropdownMenuItem>
+						))}
+					</DropdownMenuContent>
+				</DropdownMenu>
 			</div>
 			<div>
 				<ThemeToggleButton />

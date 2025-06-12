@@ -9,7 +9,7 @@ function RootComponent() {
 	return (
 		<>
 			<Navbar />
-			<main className="p-8 ">
+			<main className="p-1 lg:p-8 ">
 				<Outlet />
 			</main>
 		</>

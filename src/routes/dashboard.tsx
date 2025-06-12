@@ -33,7 +33,7 @@ function RouteComponent() {
 		},
 	];
 	return (
-		<div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 justify-items-center gap-6 p-8">
+		<div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 justify-items-center gap-6 p-1 sm:p4 lg:p-8">
 			{chartRegistry.map(({ Component, id }) => (
 				<Component key={id} />
 			))}
