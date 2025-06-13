@@ -40,7 +40,8 @@ const VideoDialog = ({ url, open, onOpenChange }: VideoProps) => {
 				</DialogHeader>
 
 				<div className="w-full">
-					<ReactPlayer playing width="100%" height="100%" url={url} />
+					{/* Issue with video, keeps playing after modal close. TBD why */}
+					<ReactPlayer playing={open} width="100%" height="100%" url={url} />
 				</div>
 			</DialogContent>
 		</Dialog>
