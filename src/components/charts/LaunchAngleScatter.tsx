@@ -22,7 +22,7 @@ const LaunchAngleScatter = ({ data }: LaunchAngleScatterProps) => {
 			if (!acc[outcome]) {
 				acc[outcome] = [];
 			}
-			acc[outcome].push([curr.LAUNCH_ANGLE, curr.EXIT_SPEED]);
+			acc[outcome].push([curr.EXIT_SPEED, curr.LAUNCH_ANGLE]);
 		}
 
 		return acc;
@@ -43,7 +43,7 @@ const LaunchAngleScatter = ({ data }: LaunchAngleScatterProps) => {
 		tooltip: {
 			pointFormat: "{series.name}: {point.y} mph",
 		},
-		xAxis: {
+		yAxis: {
 			title: {
 				text: "Launch Angle",
 			},
@@ -54,7 +54,7 @@ const LaunchAngleScatter = ({ data }: LaunchAngleScatterProps) => {
 			startOnTick: true,
 			endOnTick: true,
 		},
-		yAxis: {
+		xAxis: {
 			title: { text: "Exit Velocity" },
 			labels: { format: "{value} mph" },
 		},
@@ -72,7 +72,10 @@ const LaunchAngleScatter = ({ data }: LaunchAngleScatterProps) => {
 	};
 
 	return (
-		<ChartCard title={"Launch Angle Scatter Plot"}>
+		<ChartCard
+			title={"Launch Angle Scatter Plot"}
+			tooltip="Displays a scatter plot of launch angle vs velocity, encoded by result"
+		>
 			<Chart options={chartOptions} />
 		</ChartCard>
 	);

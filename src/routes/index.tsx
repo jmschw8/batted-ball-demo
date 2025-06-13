@@ -42,10 +42,10 @@ function Index() {
 							<li>
 								Clone the repo:{" "}
 								<a
-									href="#"
+									href="https://github.com/jmschw8/batted-ball-demo"
 									className="text-primary hover:underline hover:text-primary/80"
 								>
-									GitHub Link
+									GitHub
 								</a>
 							</li>
 							<li>

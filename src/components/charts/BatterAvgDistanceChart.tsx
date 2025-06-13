@@ -121,27 +121,29 @@ const BatterAvgDistanceChart = ({ data }: BatterAvgDistanceChartProps) => {
 					disableSelectAll
 				/>
 				<div className="flex justify-center flex-wrap gap-2">
-					{outComes.map((outcome) => {
-						const isSelected = selectedOutcome === outcome.value;
-						return (
-							<Badge
-								className="cursor-pointer"
-								key={outcome.value}
-								onClick={() =>
-									setSelectedOutcome(isSelected ? "" : outcome.value)
-								}
-								variant={isSelected ? "default" : "secondary"}
-							>
-								{outcome.label}
-							</Badge>
-						);
-					})}
+					{outComes
+						.filter((outcome) => outcome.value !== "Sacrifice")
+						.map((outcome) => {
+							const isSelected = selectedOutcome === outcome.value;
+							return (
+								<Badge
+									className="cursor-pointer"
+									key={outcome.value}
+									onClick={() =>
+										setSelectedOutcome(isSelected ? "" : outcome.value)
+									}
+									variant={isSelected ? "default" : "secondary"}
+								>
+									{outcome.label}
+								</Badge>
+							);
+						})}
 				</div>
 			</div>
 			<div>
 				{selectedBatter.length > 0 ? (
 					filteredData.length > 0 ? (
-						<Chart options={chartOptions} />
+						<Chart options={chartOptions as never} />
 					) : (
 						<div className="w-full h-72 flex flex-col justify-center">
 							<h3 className="text-xl text-center">

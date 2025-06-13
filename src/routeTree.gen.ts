@@ -11,6 +11,7 @@
 import type { CreateFileRoute, FileRoutesByPath } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PolarSprayRouteImport } from './routes/polar-spray'
 import { Route as OutcomeByVelocityRouteImport } from './routes/outcome-by-velocity'
 import { Route as LaunchAngleRouteImport } from './routes/launch-angle'
 import { Route as HardHitsRouteImport } from './routes/hard-hits'
@@ -18,6 +19,11 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AverageDistanceRouteImport } from './routes/average-distance'
 import { Route as IndexRouteImport } from './routes/index'
 
+const PolarSprayRoute = PolarSprayRouteImport.update({
+  id: '/polar-spray',
+  path: '/polar-spray',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OutcomeByVelocityRoute = OutcomeByVelocityRouteImport.update({
   id: '/outcome-by-velocity',
   path: '/outcome-by-velocity',
@@ -56,6 +62,7 @@ export interface FileRoutesByFullPath {
   '/hard-hits': typeof HardHitsRoute
   '/launch-angle': typeof LaunchAngleRoute
   '/outcome-by-velocity': typeof OutcomeByVelocityRoute
+  '/polar-spray': typeof PolarSprayRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByTo {
   '/hard-hits': typeof HardHitsRoute
   '/launch-angle': typeof LaunchAngleRoute
   '/outcome-by-velocity': typeof OutcomeByVelocityRoute
+  '/polar-spray': typeof PolarSprayRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -73,6 +81,7 @@ export interface FileRoutesById {
   '/hard-hits': typeof HardHitsRoute
   '/launch-angle': typeof LaunchAngleRoute
   '/outcome-by-velocity': typeof OutcomeByVelocityRoute
+  '/polar-spray': typeof PolarSprayRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -83,6 +92,7 @@ export interface FileRouteTypes {
     | '/hard-hits'
     | '/launch-angle'
     | '/outcome-by-velocity'
+    | '/polar-spray'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -91,6 +101,7 @@ export interface FileRouteTypes {
     | '/hard-hits'
     | '/launch-angle'
     | '/outcome-by-velocity'
+    | '/polar-spray'
   id:
     | '__root__'
     | '/'
@@ -99,6 +110,7 @@ export interface FileRouteTypes {
     | '/hard-hits'
     | '/launch-angle'
     | '/outcome-by-velocity'
+    | '/polar-spray'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -108,6 +120,7 @@ export interface RootRouteChildren {
   HardHitsRoute: typeof HardHitsRoute
   LaunchAngleRoute: typeof LaunchAngleRoute
   OutcomeByVelocityRoute: typeof OutcomeByVelocityRoute
+  PolarSprayRoute: typeof PolarSprayRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,6 +165,13 @@ declare module '@tanstack/react-router' {
       path: '/outcome-by-velocity'
       fullPath: '/outcome-by-velocity'
       preLoaderRoute: typeof OutcomeByVelocityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/polar-spray': {
+      id: '/polar-spray'
+      path: '/polar-spray'
+      fullPath: '/polar-spray'
+      preLoaderRoute: typeof PolarSprayRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -211,6 +231,15 @@ declare module './routes/outcome-by-velocity' {
     FileRoutesByPath['/outcome-by-velocity']['fullPath']
   >
 }
+declare module './routes/polar-spray' {
+  const createFileRoute: CreateFileRoute<
+    '/polar-spray',
+    FileRoutesByPath['/polar-spray']['parentRoute'],
+    FileRoutesByPath['/polar-spray']['id'],
+    FileRoutesByPath['/polar-spray']['path'],
+    FileRoutesByPath['/polar-spray']['fullPath']
+  >
+}
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -219,6 +248,7 @@ const rootRouteChildren: RootRouteChildren = {
   HardHitsRoute: HardHitsRoute,
   LaunchAngleRoute: LaunchAngleRoute,
   OutcomeByVelocityRoute: OutcomeByVelocityRoute,
+  PolarSprayRoute: PolarSprayRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

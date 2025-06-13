@@ -1,6 +1,5 @@
 import type { Hit } from "@/types/Hit";
 import ChartCard from "../shared/ChartCard";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import ReactPlayer from "react-player";
 import {
 	Table,
@@ -10,9 +9,7 @@ import {
 	TableHeader,
 	TableRow,
 } from "../ui/table";
-import { ChevronDownIcon, Eye } from "lucide-react";
 import { useState } from "react";
-import { Calendar } from "../ui/calendar";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import type { DateRange } from "react-day-picker";
@@ -24,6 +21,8 @@ import {
 	DialogTitle,
 } from "../ui/dialog";
 import { formatName } from "@/utils/utils";
+import DaterPicker from "../shared/DaterPicker";
+import { Eye } from "lucide-react";
 
 type VideoProps = {
 	url: string | undefined;
@@ -55,7 +54,6 @@ const HardestHits = ({ data }: HardestHitsProps) => {
 		from: new Date("4/10/2018"),
 		to: new Date("4/17/2018"),
 	});
-	const [open, setOpen] = useState(false);
 	const defaultVideoState = { open: false, url: undefined };
 
 	const [videoModalConfig, setVideoModalConfig] = useState<{
@@ -74,42 +72,13 @@ const HardestHits = ({ data }: HardestHitsProps) => {
 		})
 		.slice(0, 7);
 	return (
-		<ChartCard title={"Hard Hit Balls by Date"}>
-			<div className="flex">
-				<Label htmlFor="date" className="m-2">
-					Date of Games
-				</Label>
-				<Popover open={open} onOpenChange={setOpen}>
-					<PopoverTrigger asChild>
-						<Button
-							variant="outline"
-							className="w-48 justify-between font-normal"
-						>
-							{date
-								? `${date.from?.toLocaleDateString()} - ${date.to?.toLocaleDateString()}`
-								: "Select date"}
-							<ChevronDownIcon />
-						</Button>
-					</PopoverTrigger>
-					<PopoverContent className="w-auto overflow-hidden p-0" align="start">
-						<Calendar
-							mode="range"
-							selected={date}
-							defaultMonth={date?.from}
-							captionLayout="dropdown"
-							onSelect={(date) => date && setDate(date)}
-						/>
-						<div className="flex justify-center">
-							<Button
-								className="p-2 mb-2 "
-								variant="default"
-								onClick={() => setOpen(false)}
-							>
-								Close
-							</Button>
-						</div>
-					</PopoverContent>
-				</Popover>
+		<ChartCard
+			title={"Hard Hit Balls by Date"}
+			tooltip="Displays the top hardest hit balls, filterable by a date range"
+		>
+			<div>
+				<Label className="m-2">Date Range</Label>
+				<DaterPicker date={date} setDate={setDate} />
 			</div>
 			{filteredData.length > 0 ? (
 				<Table>

@@ -30,6 +30,10 @@ const links = [
 		text: "Launch Angle",
 		path: "/launch-angle",
 	},
+	{
+		text: "Spray Chart",
+		path: "/polar-spray",
+	},
 ];
 
 const Navbar = () => {

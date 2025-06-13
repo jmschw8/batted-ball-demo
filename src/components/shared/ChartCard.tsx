@@ -16,6 +16,7 @@ const ChartCard = ({ children, title, tooltip }: ChartCardProps) => {
 				<div className="flex justify-center gap-x-4 items-center mb-4">
 					<h3 className="text-2xl ">{title}</h3>
 					{tooltip && (
+						// TODO Not working on mobile, suggested to use popover
 						<Tooltip>
 							<TooltipTrigger>
 								<Info size={16} />
