@@ -1,6 +1,7 @@
 import { fetchBallData } from "@/api/hitData";
 import BatterAvgDistanceChart from "@/components/charts/BatterAvgDistanceChart";
 import { LoadingSpinner } from "@/components/shared/Loading";
+import type { Hit } from "@/types/Hit";
 import { getRouteApi } from "@tanstack/react-router";
 
 export const Route = createFileRoute({
@@ -11,11 +12,11 @@ export const Route = createFileRoute({
 
 function RouteComponent() {
 	const routeApi = getRouteApi("/average-distance");
-	const data = routeApi.useLoaderData();
+	const data = routeApi.useLoaderData() as Hit[];
 
 	return (
 		<div className="chart-route-container">
-			{data && <BatterAvgDistanceChart data={data} />}
+			<BatterAvgDistanceChart data={data} />
 		</div>
 	);
 }
