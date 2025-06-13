@@ -12,6 +12,7 @@ import type { CreateFileRoute, FileRoutesByPath } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OutcomeByVelocityRouteImport } from './routes/outcome-by-velocity'
+import { Route as LaunchAngleRouteImport } from './routes/launch-angle'
 import { Route as HardHitsRouteImport } from './routes/hard-hits'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AverageDistanceRouteImport } from './routes/average-distance'
@@ -20,6 +21,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const OutcomeByVelocityRoute = OutcomeByVelocityRouteImport.update({
   id: '/outcome-by-velocity',
   path: '/outcome-by-velocity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaunchAngleRoute = LaunchAngleRouteImport.update({
+  id: '/launch-angle',
+  path: '/launch-angle',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HardHitsRoute = HardHitsRouteImport.update({
@@ -48,6 +54,7 @@ export interface FileRoutesByFullPath {
   '/average-distance': typeof AverageDistanceRoute
   '/dashboard': typeof DashboardRoute
   '/hard-hits': typeof HardHitsRoute
+  '/launch-angle': typeof LaunchAngleRoute
   '/outcome-by-velocity': typeof OutcomeByVelocityRoute
 }
 export interface FileRoutesByTo {
@@ -55,6 +62,7 @@ export interface FileRoutesByTo {
   '/average-distance': typeof AverageDistanceRoute
   '/dashboard': typeof DashboardRoute
   '/hard-hits': typeof HardHitsRoute
+  '/launch-angle': typeof LaunchAngleRoute
   '/outcome-by-velocity': typeof OutcomeByVelocityRoute
 }
 export interface FileRoutesById {
@@ -63,6 +71,7 @@ export interface FileRoutesById {
   '/average-distance': typeof AverageDistanceRoute
   '/dashboard': typeof DashboardRoute
   '/hard-hits': typeof HardHitsRoute
+  '/launch-angle': typeof LaunchAngleRoute
   '/outcome-by-velocity': typeof OutcomeByVelocityRoute
 }
 export interface FileRouteTypes {
@@ -72,6 +81,7 @@ export interface FileRouteTypes {
     | '/average-distance'
     | '/dashboard'
     | '/hard-hits'
+    | '/launch-angle'
     | '/outcome-by-velocity'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -79,6 +89,7 @@ export interface FileRouteTypes {
     | '/average-distance'
     | '/dashboard'
     | '/hard-hits'
+    | '/launch-angle'
     | '/outcome-by-velocity'
   id:
     | '__root__'
@@ -86,6 +97,7 @@ export interface FileRouteTypes {
     | '/average-distance'
     | '/dashboard'
     | '/hard-hits'
+    | '/launch-angle'
     | '/outcome-by-velocity'
   fileRoutesById: FileRoutesById
 }
@@ -94,6 +106,7 @@ export interface RootRouteChildren {
   AverageDistanceRoute: typeof AverageDistanceRoute
   DashboardRoute: typeof DashboardRoute
   HardHitsRoute: typeof HardHitsRoute
+  LaunchAngleRoute: typeof LaunchAngleRoute
   OutcomeByVelocityRoute: typeof OutcomeByVelocityRoute
 }
 
@@ -125,6 +138,13 @@ declare module '@tanstack/react-router' {
       path: '/hard-hits'
       fullPath: '/hard-hits'
       preLoaderRoute: typeof HardHitsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/launch-angle': {
+      id: '/launch-angle'
+      path: '/launch-angle'
+      fullPath: '/launch-angle'
+      preLoaderRoute: typeof LaunchAngleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/outcome-by-velocity': {
@@ -173,6 +193,15 @@ declare module './routes/hard-hits' {
     FileRoutesByPath['/hard-hits']['fullPath']
   >
 }
+declare module './routes/launch-angle' {
+  const createFileRoute: CreateFileRoute<
+    '/launch-angle',
+    FileRoutesByPath['/launch-angle']['parentRoute'],
+    FileRoutesByPath['/launch-angle']['id'],
+    FileRoutesByPath['/launch-angle']['path'],
+    FileRoutesByPath['/launch-angle']['fullPath']
+  >
+}
 declare module './routes/outcome-by-velocity' {
   const createFileRoute: CreateFileRoute<
     '/outcome-by-velocity',
@@ -188,6 +217,7 @@ const rootRouteChildren: RootRouteChildren = {
   AverageDistanceRoute: AverageDistanceRoute,
   DashboardRoute: DashboardRoute,
   HardHitsRoute: HardHitsRoute,
+  LaunchAngleRoute: LaunchAngleRoute,
   OutcomeByVelocityRoute: OutcomeByVelocityRoute,
 }
 export const routeTree = rootRouteImport

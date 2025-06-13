@@ -1,6 +1,7 @@
 import { fetchBallData } from "@/api/hitData";
 import BatterAvgDistanceChart from "@/components/charts/BatterAvgDistanceChart";
 import HardestHits from "@/components/charts/HardestHits";
+import LaunchAngleScatter from "@/components/charts/LaunchAngleScatter";
 import OutcomesByVelocity from "@/components/charts/OutcomesByVelocityChart";
 import { LoadingSpinner } from "@/components/shared/Loading";
 import type { Hit } from "@/types/Hit";
@@ -20,6 +21,10 @@ function RouteComponent() {
 
 	const chartRegistry = [
 		{ Component: () => <OutcomesByVelocity data={data} />, id: "outcomesByEV" },
+		{
+			Component: () => <LaunchAngleScatter data={data} />,
+			id: "launchAngleScatter",
+		},
 		{ Component: () => <BatterAvgDistanceChart data={data} />, id: "avgDist" },
 		{ Component: () => <HardestHits data={data} />, id: "hardestHit" },
 		{

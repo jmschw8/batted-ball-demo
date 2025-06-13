@@ -73,7 +73,6 @@ const HardestHits = ({ data }: HardestHitsProps) => {
 			return true;
 		})
 		.slice(0, 7);
-	console.log(date);
 	return (
 		<ChartCard title={"Hard Hit Balls by Date"}>
 			<div className="flex">

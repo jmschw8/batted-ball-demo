@@ -24,3 +24,14 @@ export const outComes = [
 		value: "Sacrifice",
 	},
 ];
+
+// Values cribbed from https://api.highcharts.com/highcharts/colors
+export const colors: Record<string, string> = {
+	Single: "#2caffe",
+	Double: "#544fc5",
+	Triple: "#00e272",
+	HomeRun: "#fe6a35",
+	Out: "#fa4b42",
+	Walk: "#d568fb",
+	Strikeout: "#feb56a",
+};
