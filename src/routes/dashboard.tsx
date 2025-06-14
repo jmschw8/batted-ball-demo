@@ -3,6 +3,7 @@ import BatterAvgDistanceChart from "@/components/charts/BatterAvgDistanceChart";
 import HardestHits from "@/components/charts/HardestHits";
 import LaunchAngleScatter from "@/components/charts/LaunchAngleScatter";
 import OutcomesByVelocity from "@/components/charts/OutcomesByVelocityChart";
+import PolarSpray from "@/components/charts/PolarSpray";
 // import PolarSpray from "@/components/charts/PolarSpray";
 import { LoadingSpinner } from "@/components/shared/Loading";
 import type { Hit } from "@/types/Hit";
@@ -26,10 +27,10 @@ function RouteComponent() {
 			Component: () => <LaunchAngleScatter data={data} />,
 			id: "launchAngleScatter",
 		},
-		// {
-		// 	Component: () => <PolarSpray data={data} />,
-		// 	id: "polarSpray",
-		// },
+		{
+			Component: () => <PolarSpray data={data} />,
+			id: "polarSpray",
+		},
 		{ Component: () => <BatterAvgDistanceChart data={data} />, id: "avgDist" },
 		{ Component: () => <HardestHits data={data} />, id: "hardestHit" },
 	];
