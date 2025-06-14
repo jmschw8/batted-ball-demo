@@ -41,7 +41,7 @@ const LaunchAngleScatter = ({ data }: LaunchAngleScatterProps) => {
 			type: "scatter",
 		},
 		tooltip: {
-			pointFormat: "{series.name}: {point.y} mph",
+			pointFormat: "{series.name}: {point.x} mph",
 		},
 		yAxis: {
 			title: {
