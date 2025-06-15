@@ -65,7 +65,6 @@ const BatterAvgDistanceChart = ({ data }: BatterAvgDistanceChartProps) => {
 				hits.reduce((acc, curr) => acc + curr.HIT_DISTANCE, 0) / hits.length
 			);
 			const batter = batters.find((b) => b.value === id);
-			//todo fix typing
 			return { name: batter ? formatName(batter.label) : "", y: avgDistance };
 		});
 	}, [data, selectedBatter, batters, selectedOutcome]);
